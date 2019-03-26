@@ -6,33 +6,39 @@ import "./App.css";
 import data from "./dictionary.json";
 
 import Search from "./components/Search";
-import Result from "./components/Result";
+// import Result from "./components/Result";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dico: JsonFind(data),
       search: "",
-      res: []
+      result: []
     };
   }
 
   handleSearch(event) {
-    const dico = JsonFind(data);
     event.preventDefault();
-    console.log(dico.findValues(this.state.search));
-    this.setState({res: dico.findValues(this.state.search)});
-    console.log(this.state.res);
-    
+    const search = this.state.search;
+    const dico = this.state.dico;
+    const resultCopy = [...this.state.result];
+    const res = dico.findValues(search);
+    resultCopy.unshift(res);
+    this.setState({result: resultCopy});
   }
 
+  // this.setState({
+  //   result: this.state.result.push(dico.findValues(this.state.search))
+  // });
+
   handleInput(event) {
-    const searchWord = event.target.value;
+    const searchWord = event.target.value.toLowerCase();
     this.setState({search: searchWord});
   }
 
   render() {
-    const {results} = this.state.res;
+    const {result} = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -41,9 +47,7 @@ class App extends Component {
             search={event => this.handleSearch(event)}
             input={event => this.handleInput(event)}
           />
-          {/* {results.map(oneResult => {
-            return <Result res={oneResult} />;
-          })} */}
+          {/* <Result data={result} />; */}
         </header>
       </div>
     );
