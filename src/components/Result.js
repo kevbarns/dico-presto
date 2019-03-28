@@ -4,7 +4,7 @@ const Result = props => {
   const {result, search} = props;
   let message;
 
-  if (result[0] === undefined) {
+  if (result === undefined) {
     message = "message is-small is-danger";
   } else {
     message = "message is-info";
@@ -12,16 +12,20 @@ const Result = props => {
 
   return (
     <div>
-      <article className={message}>
-        <div className="message-header">
-          <p> {result[0] !== undefined ? search : ""} </p>
-        </div>
-        <div className="message-body">
-          {result[0] !== undefined
-            ? result
-            : "The word you are looking for does not exist."}
-        </div>
-      </article>
+      {result === "" ? (
+        <div />
+      ) : (
+        <article className={message}>
+          <div className="message-header">
+            <p> {result !== undefined ? search : ""} </p>
+          </div>
+          <div className="message-body">
+            {result !== undefined
+              ? result
+              : "The word you are looking for does not exist."}
+          </div>
+        </article>
+      )}
     </div>
   );
 };
