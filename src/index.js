@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './stylesheets/index.css';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import 'bulma/css/bulma.css';
+import './stylesheets/bulma-helpers.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
