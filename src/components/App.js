@@ -23,7 +23,6 @@ class App extends Component {
   handleSearch(event) {
     event.preventDefault();
     const {search, dico} = this.state;
-    // const dico = this.state.dico;
     const resultCopy = [...this.state.result];
     const res = dico.findValues(search);
     resultCopy.unshift(res[search]);
@@ -47,11 +46,7 @@ class App extends Component {
             search={event => this.handleSearch(event)}
             input={event => this.handleInput(event)}
           />
-          {result ? (
-            <Result result={result} search={search} />
-          ) : (
-            ""
-          )}
+          {result ? <Result result={result} search={search} /> : ""}
         </div>
       </section>
     );
